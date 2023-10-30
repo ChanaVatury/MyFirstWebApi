@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="HomeJs.js"></script>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1 id="welcome" >welcome to </h1>
+    <script>document.getElementById("welcome").textContent += JSON.parse(sessionStorage.getItem("CurrentUser")).userName</script>
+    <button onclick="showApdate()">לעדכון פרטים</button>
+    <div id="update" style="visibility:hidden">
+        <input id="UserName"></input>
+        <label>שם משתמש</label>
+        <br />
+        <input id="Code"></input>
+        <label>סיסמא</label>
+        <br />
+        <input id="FirstName"></input>
+        <label>שם פרטי</label>
+        <br />
+        <input id="LastName"></input>
+        <label>שם משפחה</label>
+        <br />
+        <button onclick="Update()">לעידכון</button>
+    </div>
+</body>
+</html>
