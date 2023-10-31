@@ -5,7 +5,8 @@ namespace Repository
 {
     public class UserRepository : IUserRepository
     {
-        const string filePath = "M:\\Web\\Layet\\MyFirstWebApi/Users.txt";
+        const string filePath = "D:\\gggggg/Users.txt";
+        //const string filePath = "M:\\Web\\Layet\\MyFirstWebApi/Users.txt";
         public async Task<Users> getUserByPassword(string code, string userName)
         {
             using (StreamReader reader =  System.IO.File.OpenText(filePath))
@@ -15,20 +16,6 @@ namespace Repository
                 {
                     Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
                     if (user.UserName == userName && user.Code == code)
-                        return user;
-                }
-            }
-            return null;
-        }
-        public async Task<Users> getUserById(int id)
-        {
-            using (StreamReader reader = System.IO.File.OpenText(filePath))
-            {
-                string? currentUserInFile;
-                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
-                {
-                    Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
-                    if (user.UserId == id)
                         return user;
                 }
             }
@@ -67,15 +54,6 @@ namespace Repository
 
         }
 
-        public Task<Users> getUserByPassword(string code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Users> getUserById(string code)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }

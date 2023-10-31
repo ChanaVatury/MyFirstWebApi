@@ -28,10 +28,6 @@ namespace Servicies
         {
             return await userRepository.getUserByPassword(code, userName);
         }
-        public async Task<Users> getUserById(string code, string userName)
-        {
-            return await userRepository.getUserById(code);
-        }
         public async Task<Users> updateUser(int id, Users user)
         {
             if (check(user.Code) < 2)
@@ -45,19 +41,7 @@ namespace Servicies
             return result.Score;
         }
 
-        Task<int> IUserServicies.check(string Code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Users> getUserById(string code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Users> getUserById(int id)
-        {
-            throw new NotImplementedException();
-        }
+   
+    
     }
 }

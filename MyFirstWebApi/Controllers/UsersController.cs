@@ -32,14 +32,14 @@ namespace MyFirstWebApi.Controllers
             return Ok(user);
         }
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Users>>> Get([FromQuery] int id)
-        {
-            Users user = await userServices.getUserById(id);
-            if (user == null)
-                return NoContent();
-            return Ok(user);
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<IEnumerable<Users>>> Get([FromQuery] int id)
+        //{
+        //    Users user = await userServices.getUserById(id);
+        //    if (user == null)
+        //        return NoContent();
+        //    return Ok(user);
+        //}
 
         //POST api/<UserController>
         [HttpPost("makeuser")]
