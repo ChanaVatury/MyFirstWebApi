@@ -4,10 +4,10 @@ namespace Servicies
 {
     public interface IUserServicies
     {
-        Users addUser(Users user);
-        int check(string Code);
-        Users getUserByPasswordAndUserName(string code, string userName);
-        Users updateUser(int id, Users user);
-        //dfdffdfd
+        Task<Users> addUser(Users user);
+        Task<int> check(string Code);
+        Task<Users> getUserByPasswordAndUserName(string code, string userName);
+        Task<Users> updateUser(int id, Users user);
+
     }
 }

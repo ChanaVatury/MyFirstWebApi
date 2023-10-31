@@ -24,9 +24,9 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public ActionResult<IEnumerable<Users>> Get([FromQuery] string userName, [FromQuery] string code)
+        public async Task<ActionResult<IEnumerable<Users>>> Get([FromQuery] string userName, [FromQuery] string code)
         {
-            Users user = userServices.getUserByPasswordAndUserName(code, userName);
+            Users user = await userServices.getUserByPasswordAndUserName(code, userName);
             if (user == null)
                  return NoContent();
             return Ok(user);
@@ -40,10 +40,10 @@ namespace MyFirstWebApi.Controllers
 
         //POST api/<UserController>
         [HttpPost("makeuser")]
-        public ActionResult Post([FromBody] Users user)
+        public async Task<ActionResult> Post([FromBody] Users user)
         {
             try {
-                Users newUser = userServices.addUser(user);
+                Users newUser = await userServices.addUser(user);
                 
                 return CreatedAtAction(nameof(Get), new { id = user.UserId }, user);
             }
@@ -55,9 +55,9 @@ namespace MyFirstWebApi.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public Users Put(int id, [FromBody] Users userToUpdate)
+        public async Task<Users> Put(int id, [FromBody] Users userToUpdate)
         {
-            Users user = userServices.updateUser(id, userToUpdate);
+            Users user = await userServices.updateUser(id, userToUpdate);
             return user;
         }
 

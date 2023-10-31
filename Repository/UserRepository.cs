@@ -6,12 +6,12 @@ namespace Repository
     public class UserRepository : IUserRepository
     {
         const string filePath = "M:\\Web\\Layet\\MyFirstWebApi/Users.txt";
-        public Users getUserByPassword(string code, string userName)
+        public async Task<Users> getUserByPassword(string code, string userName)
         {
-            using (StreamReader reader = System.IO.File.OpenText(filePath))
+            using (StreamReader reader =  System.IO.File.OpenText(filePath))
             {
                 string? currentUserInFile;
-                while ((currentUserInFile = reader.ReadLine()) != null)
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
                     Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
                     if (user.UserName == userName && user.Code == code)
@@ -20,7 +20,7 @@ namespace Repository
             }
             return null;
         }
-        public Users addUser(Users user)
+        public async Task<Users> addUser(Users user)
         {
 
             int numberOfUsers = System.IO.File.ReadLines(filePath).Count();
@@ -29,13 +29,13 @@ namespace Repository
             System.IO.File.AppendAllText(filePath, userJson + Environment.NewLine);
             return user;
         }
-        public Users updateUser(int id, Users userToUpdate)
+        public async Task <Users> updateUser(int id, Users userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader = System.IO.File.OpenText(filePath))
             {
                 string currentUserInFile;
-                while ((currentUserInFile = reader.ReadLine()) != null)
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
 
                     Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
@@ -45,9 +45,9 @@ namespace Repository
             }
             if (textToReplace != string.Empty)
             {
-                string text = System.IO.File.ReadAllText(filePath);
+                string text = await System.IO.File.ReadAllTextAsync(filePath);
                 text = text.Replace(textToReplace, JsonSerializer.Serialize(userToUpdate));
-                System.IO.File.WriteAllText(filePath, text);
+                await System.IO.File.WriteAllTextAsync(filePath, text);
             }
             return userToUpdate;
 

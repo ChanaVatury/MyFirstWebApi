@@ -18,27 +18,32 @@ namespace Servicies
             userRepository = _userRepository;
         }
 
-        public Users addUser(Users user)
+        public async Task<Users> addUser(Users user)
         {
             if (check(user.Code) < 2)
                 return null;
-            return userRepository.addUser(user);
+            return await userRepository.addUser(user);
         }
-        public Users getUserByPasswordAndUserName(string code, string userName)
+        public async Task<Users> getUserByPasswordAndUserName(string code, string userName)
         {
-            return userRepository.getUserByPassword(code, userName);
+            return await userRepository.getUserByPassword(code, userName);
         }
-        public Users updateUser(int id, Users user)
+        public async Task<Users> updateUser(int id, Users user)
         {
             if (check(user.Code) < 2)
                 return null;
-            return userRepository.updateUser(id, user);
+            return await userRepository.updateUser(id, user);
         }
 
         public int check(string Code)
         {
             var result = Zxcvbn.Core.EvaluatePassword(Code);
             return result.Score;
+        }
+
+        Task<int> IUserServicies.check(string Code)
+        {
+            throw new NotImplementedException();
         }
     }
 }
