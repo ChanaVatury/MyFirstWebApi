@@ -62,6 +62,21 @@ async function Login() {
 
    
 }
+async function GetById(id) {
+
+
+    const res = await fetch(`api/users?&code=${id}`)
+    if (!res.ok) {
+        throw new Error("please register")
+    }
+
+    const data = await res.json();
+    console.log(data, "data")
+    window.location.href = './Update.html';
+    sessionStorage.setItem("CurrentUser", JSON.stringify(data))
+
+
+}
 function showApdate() {
     const reg = document.getElementById("update")
     reg.style.visibility = "initial"

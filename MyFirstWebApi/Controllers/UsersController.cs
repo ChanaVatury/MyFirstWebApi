@@ -33,9 +33,12 @@ namespace MyFirstWebApi.Controllers
         }
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<IEnumerable<Users>>> Get([FromQuery] int id)
         {
-            return "value";
+            Users user = await userServices.getUserById(id);
+            if (user == null)
+                return NoContent();
+            return Ok(user);
         }
 
         //POST api/<UserController>

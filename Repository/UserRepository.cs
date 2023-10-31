@@ -20,6 +20,20 @@ namespace Repository
             }
             return null;
         }
+        public async Task<Users> getUserById(int id)
+        {
+            using (StreamReader reader = System.IO.File.OpenText(filePath))
+            {
+                string? currentUserInFile;
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
+                {
+                    Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
+                    if (user.UserId == id)
+                        return user;
+                }
+            }
+            return null;
+        }
         public async Task<Users> addUser(Users user)
         {
 
@@ -53,7 +67,15 @@ namespace Repository
 
         }
 
+        public Task<Users> getUserByPassword(string code)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<Users> getUserById(string code)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
