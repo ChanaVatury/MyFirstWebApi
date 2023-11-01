@@ -9,6 +9,6 @@ namespace Servicies
         Task<Users> getUserByPasswordAndUserName(string code, string userName);
         Task<Users> updateUser(int id, Users user);
         int check(string Code);
-        //ujuuk
+        //ujuukjyikuiku
     }
 }
