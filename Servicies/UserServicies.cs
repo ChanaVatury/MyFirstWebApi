@@ -20,7 +20,7 @@ namespace Servicies
 
         public async Task<Users> addUser(Users user)
         {
-            if (check(user.Code) < 2)
+            if (check(user.Passwordd) < 2)
                 return null;
             return await userRepository.addUser(user);
         }
@@ -30,7 +30,7 @@ namespace Servicies
         }
         public async Task<Users> updateUser(int id, Users user)
         {
-            if (check(user.Code) < 2)
+            if (check(user.Passwordd) < 2)
                 return null;
             return await userRepository.updateUser(id, user);
         }

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Servicies;
 
@@ -14,8 +15,9 @@ internal class Program
         builder.Services.AddScoped<IUserServicies, UserServicies>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
+        builder.Services.AddDbContext<ShoppingBookContext>(o => o.UseSqlServer("Server=srv2\\pupils;Database=ShoppingBook;Trusted_Connection=True;TrustServerCertificate=True"));
         var app = builder.Build();
+        //builder.Services.AddDbContext<ShoppingBookContext>();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

@@ -5,8 +5,16 @@ namespace Repository
 {
     public class UserRepository : IUserRepository
     {
+        private readonly ShoppingBookContext shoppingBookContext;
+
        // const string filePath = "D:\\gggggg/Users.txt";
         const string filePath = "M:\\Web\\Layet\\MyFirstWebApi/Users.txt";
+
+        public UserRepository(ShoppingBookContext _shoppingBookContext)
+        {
+            shoppingBookContext = _shoppingBookContext;
+        }
+
         public async Task<Users> getUserByPassword(string code, string userName)
         {
             using (StreamReader reader =  System.IO.File.OpenText(filePath))
@@ -15,7 +23,7 @@ namespace Repository
                 while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
                     Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
-                    if (user.UserName == userName && user.Code == code)
+                    if (user.Email == userName && user.Passwordd == code)
                         return user;
                 }
             }
@@ -23,11 +31,8 @@ namespace Repository
         }
         public async Task<Users> addUser(Users user)
         {
-
-            int numberOfUsers = System.IO.File.ReadLines(filePath).Count();
-            user.UserId = numberOfUsers + 1;
-            string userJson = JsonSerializer.Serialize(user);
-            System.IO.File.AppendAllText(filePath, userJson + Environment.NewLine);
+            await shoppingBookContext.Users.AddAsync(user);
+            await shoppingBookContext.SaveChangesAsync();
             return user;
         }
         public async Task <Users> updateUser(int id, Users userToUpdate)
