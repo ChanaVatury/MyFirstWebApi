@@ -5,8 +5,8 @@ namespace Repository
 {
     public class UserRepository : IUserRepository
     {
-        const string filePath = "D:\\gggggg/Users.txt";
-        //const string filePath = "M:\\Web\\Layet\\MyFirstWebApi/Users.txt";
+       // const string filePath = "D:\\gggggg/Users.txt";
+        const string filePath = "M:\\Web\\Layet\\MyFirstWebApi/Users.txt";
         public async Task<Users> getUserByPassword(string code, string userName)
         {
             using (StreamReader reader =  System.IO.File.OpenText(filePath))

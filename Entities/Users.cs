@@ -6,7 +6,7 @@ namespace Entities
     {
 
         public int UserId { get; set; }
-        [MinLength(10, ErrorMessage ="its so short"), MaxLength]
+       // [MinLength(10, ErrorMessage ="its so short"), MaxLength]
         public string UserName { get; set; }
         public string Code { get; set; }
         public string FirstName { get; set; }
