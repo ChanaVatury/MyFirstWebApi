@@ -42,7 +42,7 @@ namespace MyFirstWebApi.Controllers
         //}
 
         //POST api/<UserController>
-        [HttpPost("")]
+        [HttpPost("")]//
         public async Task<ActionResult> Post([FromBody] Users user)
         {
             
