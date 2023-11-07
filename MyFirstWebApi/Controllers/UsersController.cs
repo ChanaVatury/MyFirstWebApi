@@ -42,17 +42,14 @@ namespace MyFirstWebApi.Controllers
         //}
 
         //POST api/<UserController>
-        [HttpPost("makeuser")]
+        [HttpPost("")]
         public async Task<ActionResult> Post([FromBody] Users user)
         {
-            try {
+            
                 Users newUser = await userServices.addUser(user);
-                
-                return CreatedAtAction(nameof(Get), new { id = user.UserId }, user);
-            }
-            catch (Exception ex){
-                throw ex;
-             }       
+
+            return CreatedAtAction(nameof(Get), new { id = user.UserId }, user);
+               
            
         }
 

@@ -15,7 +15,7 @@ internal class Program
         builder.Services.AddScoped<IUserServicies, UserServicies>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddDbContext<ShoppingBookContext>(o => o.UseSqlServer("Server=srv2\\pupils;Database=ShoppingBook;Trusted_Connection=True;TrustServerCertificate=True"));
+        builder.Services.AddDbContext<ShoppingBookContext>();
         var app = builder.Build();
         //builder.Services.AddDbContext<ShoppingBookContext>();
 

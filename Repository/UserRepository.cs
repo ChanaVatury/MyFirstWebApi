@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 namespace Repository
@@ -17,17 +18,8 @@ namespace Repository
 
         public async Task<Users> getUserByPassword(string code, string userName)
         {
-            using (StreamReader reader =  System.IO.File.OpenText(filePath))
-            {
-                string? currentUserInFile;
-                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
-                {
-                    Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
-                    if (user.Email == userName && user.Passwordd == code)
-                        return user;
-                }
-            }
-            return null;
+           return  await shoppingBookContext.Users.Where(e => e.Passwordd == code && e.Email == userName).FirstOrDefaultAsync();
+        
         }
         public async Task<Users> addUser(Users user)
         {
