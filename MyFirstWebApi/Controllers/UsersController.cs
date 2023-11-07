@@ -29,7 +29,7 @@ namespace MyFirstWebApi.Controllers
             Users user = await userServices.getUserByPasswordAndUserName(code, userName);
             if (user == null)
                  return NoContent();
-            return Ok(user);
+            return Ok(user);//
         }
         // GET api/<UserController>/5
         //[HttpGet("{id}")]
