@@ -8,11 +8,12 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+
         // Add services to the container.
 
         builder.Services.AddControllers();
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<IUserServicies, UserServicies>();
+        builder.Services.AddTransient<IUserRepository, UserRepository>();
+        builder.Services.AddTransient<IUserServicies, UserServicies>();
         builder.Services.AddTransient<IProductRepository, ProductRepository>();
         builder.Services.AddTransient<IProductServices, ProductServices>();
         builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
