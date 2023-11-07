@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities;
+using Microsoft.AspNetCore.Mvc;
+using Repository;
+using Servicies;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,20 @@ namespace MyFirstWebApi.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
+        ICategoryServices categoryServices;
+
+        public CategoryController(ICategoryServices _categoryServices)
+        {
+            categoryServices = _categoryServices;
+        }
+
         // GET: api/<CategoryController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<Category>> Get()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<Category> allCategory = await categoryServices.getAllCategory();
+            return allCategory;
         }
 
-        // GET api/<CategoryController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<CategoryController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<CategoryController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
