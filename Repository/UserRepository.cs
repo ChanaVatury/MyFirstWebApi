@@ -32,7 +32,7 @@ namespace Repository
             userToUpdate.UserId = id;
             shoppingBookContext.Users.Update(userToUpdate);
             await shoppingBookContext.SaveChangesAsync();
-
+            return userToUpdate;
 
         }
 
