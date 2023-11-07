@@ -27,27 +27,12 @@ namespace Repository
             await shoppingBookContext.SaveChangesAsync();
             return user;
         }
-        public async Task <Users> updateUser(int id, Users userToUpdate)
+        public async Task<Users> updateUser(int id, Users userToUpdate)
         {
-            string textToReplace = string.Empty;
-            using (StreamReader reader = System.IO.File.OpenText(filePath))
-            {
-                string currentUserInFile;
-                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
-                {
+            userToUpdate.UserId = id;
+            shoppingBookContext.Users.Update(userToUpdate);
+            await shoppingBookContext.SaveChangesAsync();
 
-                    Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
-                    if (user.UserId == id)
-                        textToReplace = currentUserInFile;
-                }
-            }
-            if (textToReplace != string.Empty)
-            {
-                string text = await System.IO.File.ReadAllTextAsync(filePath);
-                text = text.Replace(textToReplace, JsonSerializer.Serialize(userToUpdate));
-                await System.IO.File.WriteAllTextAsync(filePath, text);
-            }
-            return userToUpdate;
 
         }
 

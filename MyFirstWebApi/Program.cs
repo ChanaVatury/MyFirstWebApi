@@ -13,6 +13,7 @@ internal class Program
         builder.Services.AddControllers();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IUserServicies, UserServicies>();
+        builder.Services.AddTransient<IProductRepository, ProductRepository>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ShoppingBookContext>();
