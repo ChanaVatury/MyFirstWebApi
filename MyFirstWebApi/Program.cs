@@ -16,7 +16,7 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ShoppingBookContext>();
-        var app = builder.Build();//
+        var app = builder.Build();//gfgghh
         //builder.Services.AddDbContext<ShoppingBookContext>();
 
         // Configure the HTTP request pipeline.
