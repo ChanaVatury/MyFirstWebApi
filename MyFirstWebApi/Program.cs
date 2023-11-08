@@ -18,6 +18,8 @@ internal class Program
         builder.Services.AddTransient<IProductServices, ProductServices>();
         builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
         builder.Services.AddTransient<ICategoryServices, CategoryServices>();
+        builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+        builder.Services.AddTransient<IOrderServicies, OrderServicies>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ShoppingBookContext>();
