@@ -7,13 +7,13 @@
 </head>
 <body>
     <h1 id="welcome" >welcome to </h1>
-    <script>document.getElementById("welcome").textContent += JSON.parse(sessionStorage.getItem("CurrentUser")).userName</script>
+    <script>document.getElementById("welcome").textContent += JSON.parse(sessionStorage.getItem("CurrentUser")).Email</script>
     <button onclick="showApdate()">לעדכון פרטים</button>
     <div id="update" style="visibility:hidden">
-        <input id="UserName"></input>
+        <input id="Email"></input>
         <label>שם משתמש</label>
         <br />
-        <input id="Code"></input>
+        <input id="Passwordd"></input>
         <label>סיסמא</label>
         <br />
         <input id="FirstName"></input>

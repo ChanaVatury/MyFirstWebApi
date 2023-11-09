@@ -5,8 +5,8 @@ const ShowRegisterTags = () => {
 }
 async function Register() {
     try {
-        const UserName = document.getElementById("UserName").value;
-        const Code = document.getElementById("Code").value;
+        const Email = document.getElementById("Email").value;
+        const Passwordd = document.getElementById("Passwordd").value;
         checkCode()
         //if (document.getElementById("password-strength-meter").value < 2) {
         //    alert('the password is not strength')
@@ -14,9 +14,9 @@ async function Register() {
         //}
         const FirstName = document.getElementById("FirstName").value;
         const LastName = document.getElementById("LastName").value;
-        const User = { UserName, Code, FirstName, LastName };
+        const User = { Email, Passwordd, FirstName, LastName };
 
-        const res = await fetch("api/users/makeuser", {
+        const res = await fetch("api/users/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -46,20 +46,19 @@ async function Register() {
     
 }
 async function Login() {
-    const UserName = document.getElementById("UserName1").value;
-    const Code = document.getElementById("Code1").value;
+    const Email = document.getElementById("Email1").value;
+    const Passwordd = document.getElementById("Passwordd1").value;
 
-    const res = await fetch(`api/users?userName=${UserName}&code=${Code}`) 
+    const res = await fetch(`api/users?userName=${Email}&code=${Passwordd}`) 
     if (!res.ok) {
         ShowRegisterTags()
         throw new Error("please register")
     }
-
     const data = await res.json();
-    console.log(data, "data")
-    window.location.href = './Update.html';
-    sessionStorage.setItem("CurrentUser", JSON.stringify(data))
+    console.log(data);
 
+    sessionStorage.setItem("CurrentUser", JSON.stringify(data));
+    window.location.href = './Update.html';
    
 }
 //async function GetById(id) {
@@ -82,11 +81,11 @@ async function Update() {
     try {
     const userNow = sessionStorage.getItem("CurrentUser");
     const id = JSON.parse(userNow).userId;
-    const UserName = document.getElementById("UserName").value;
-    const Code = document.getElementById("Code").value;
+        const Email = document.getElementById("Email").value;
+        const Passwordd = document.getElementById("Passwordd").value;
     const FirstName = document.getElementById("FirstName").value;
     const LastName = document.getElementById("LastName").value;
-    const User = { UserName, Code, FirstName, LastName };
+        const User = { Email, Passwordd, FirstName, LastName };
   
         const res = await fetch(`api/users/${id}`, {
             method: "PUT",
@@ -122,13 +121,13 @@ async function checkCode() {
     }
     var meter = document.getElementById('password-strength-meter');
     var text = document.getElementById('password-strength-text');
-    const Code = document.getElementById("Code").value;
+    const Passwordd = document.getElementById("Passwordd").value;
     const res = await fetch("api/users/check", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(Code)
+        body: JSON.stringify(Passwordd)
     })
     if (!res.ok)
         throw new Error("error in adding your details to our site")
@@ -138,7 +137,7 @@ async function checkCode() {
     meter.value = data;
 
     // Update the text indicator
-    if (Code !== "") {
+    if (Passwordd !== "") {
         text.innerHTML = "Strength: " + strength[data.score];
     } else {
         text.innerHTML = "";
