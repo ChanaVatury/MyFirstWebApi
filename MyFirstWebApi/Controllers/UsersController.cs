@@ -24,7 +24,7 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> Get([FromQuery] string userName, [FromQuery] string code)
+        public async Task<ActionResult<Users>> Get([FromQuery] string userName, [FromQuery] string code)
         {
             Users user = await userServices.getUserByPasswordAndUserName(code, userName);
             if (user == null)
