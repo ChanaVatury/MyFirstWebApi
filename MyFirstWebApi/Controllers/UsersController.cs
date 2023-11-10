@@ -20,7 +20,17 @@ namespace MyFirstWebApi.Controllers
         {
             userServices = _userServices;
         }
+        [HttpPost("check")]
+        public int Check([FromBody] string password)
+        {
+            if (password != "")
+            {
+                var result = Zxcvbn.Core.EvaluatePassword(password);
+                return result.Score;
+            }
+            return -1;
 
+        }
 
         // GET: api/<UserController>
         [HttpGet]

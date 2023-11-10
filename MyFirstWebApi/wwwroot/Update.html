@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1 id="welcome" >welcome to </h1>
-    <script>document.getElementById("welcome").textContent += JSON.parse(sessionStorage.getItem("CurrentUser")).Email</script>
+    <script>document.getElementById("welcome").textContent += JSON.parse(sessionStorage.getItem("CurrentUser")).email</script>
     <button onclick="showApdate()">לעדכון פרטים</button>
     <div id="update" style="visibility:hidden">
         <input id="Email"></input>

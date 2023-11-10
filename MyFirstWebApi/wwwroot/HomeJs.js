@@ -132,7 +132,7 @@ async function checkCode() {
     if (!res.ok)
         throw new Error("error in adding your details to our site")
     const data = await res.json();
-    if (data <= 2) alert("your password is weak!! try again")
+  /*  if (data <= 2) alert("your password is weak!! try again")*/
     // Update the password strength meter
     meter.value = data;
 
