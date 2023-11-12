@@ -124,7 +124,7 @@ async function checkCode() {
     const Passwordd = document.getElementById("Passwordd").value;
     const res = await fetch("api/users/check", {
         method: "POST",
-        headers: {
+        headers: {//
             "Content-Type": "application/json"
         },
         body: JSON.stringify(Passwordd)
