@@ -19,7 +19,7 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public async Task<IEnumerable<Product>> Get(string? name,  int? minPrice,
+        public async Task<IEnumerable<Product>> Get(string? name,  int? minPrice,//
              int? maxPrice, [FromQuery] int?[] categoryIds)
         {
             IEnumerable<Product> allProducts = await productServices.getAllProduct(name,minPrice,maxPrice,categoryIds);
