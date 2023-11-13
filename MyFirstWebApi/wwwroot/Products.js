@@ -12,4 +12,7 @@ async function filterProducts() {
 
 async function drawProducts(prod) {
 
+
+
+
 }

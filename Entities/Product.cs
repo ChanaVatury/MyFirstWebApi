@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Entities;
 
@@ -15,7 +16,9 @@ public partial class Product
 
     public string? Image { get; set; }
 
-    public virtual Category? Category { get; set; }
 
+    [JsonIgnore]
+    public virtual Category? Category { get; set; }
+    [JsonIgnore]
     public virtual ICollection<OrdersItem> OrdersItems { get; set; } = new List<OrdersItem>();
 }
