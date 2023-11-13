@@ -18,9 +18,10 @@ namespace Servicies
             this.productRepository = _productRepository;
         }
 
-        public async Task<IEnumerable<Product>> getAllProduct()
+        public async Task<IEnumerable<Product>> getAllProduct(string? name, int? minPrice,
+            int? maxPrice, int?[] categoryIds)
         {
-            return await productRepository.getAllProduct();
+            return await productRepository.getAllProduct(name,minPrice,maxPrice,categoryIds);
         }
         public async Task<IEnumerable<Product>> getProductByCategory(int category)
         {

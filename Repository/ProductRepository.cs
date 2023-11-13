@@ -17,9 +17,18 @@ namespace Repository
             shoppingBookContext = _shoppingBookContext;
         }
 
-        public async Task<IEnumerable<Product>> getAllProduct()
+        public async Task<IEnumerable<Product>> getAllProduct(string? name,int? minPrice, 
+            int? maxPrice, int?[] categoryIds)
         {
-            return await shoppingBookContext.Products.ToListAsync();
+            var query = shoppingBookContext.Products.Where(product =>
+                (name == null) ? (true) : (product.Name.Contains(name))
+                && ((minPrice == null) ? (true) : (int.Parse(product.Price) >= minPrice))
+                && ((maxPrice == null) ? (true) : (int.Parse(product.Price) <= maxPrice))
+                && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
+                .OrderBy(p => p.Price);
+            List<Product> products = await query.ToListAsync();
+           
+            return products;
         }
         public async Task<IEnumerable<Product>> getProductByCategory(int category)
         {
