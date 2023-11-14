@@ -1,7 +1,5 @@
 
-
 async function filterProducts() {
-
     let checkedCategories = [];
     const allCategoriesOptions = document.querySelectorAll(".opt");
     for (let i = 0; i < allCategoriesOptions.length; i++) {
@@ -17,23 +15,29 @@ async function getBooks(name, minPrice, maxPrice, checkedCategories) {
     const data = await res.json();
     console.log(data);
 }
-async function drawProducts(prod) {
+async function drawProducts() {
     const res = await fetch(`api/Product`);
     const data = await res.json();
-    for (let i; i < data.length; i++) {
+    console.log(data)
+    for (let i=0; i < data.length; i++) {
         var tmpCatg = document.getElementById("temp-card");
         var cln = tmpCatg.content.cloneNode(true);
-        cln.querySelector(".name").innerText = data[i].name;
+        cln.querySelector("h1").innerText = data[i].name;
         cln.querySelector(".price").innerText = data[i].price;
-        cln.querySelector(".name").innerText = data[i].name;
-        document.getElementById("categoryList").appendChild(cln);
+        cln.querySelector("img").src = "./images/" + data[i].image;
+        cln.querySelector("button").addEventListener('click', () => { addToCart(data[i]) });
+        document.getElementById("PoductList").appendChild(cln);
     }
+}
+async function addToCart() {
+
 }
 async function getAllCategory() {
     const res = await fetch("api/category");
     const data = await res.json();
     return data;
 }
+
 const showCategories = async () => {
     const Categories = await getAllCategory();
     console.log(Categories);
