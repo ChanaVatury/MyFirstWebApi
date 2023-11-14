@@ -22,8 +22,8 @@ namespace Repository
         {
             var query = shoppingBookContext.Products.Where(product =>
                 (name == null) ? (true) : (product.Name.Contains(name))
-                && ((minPrice == null) ? (true) : (int.Parse(product.Price) >= minPrice))
-                && ((maxPrice == null) ? (true) : (int.Parse(product.Price) <= maxPrice))
+                && ((minPrice == null) ? (true) : (product.Price >= minPrice))
+                && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
                 && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
                 .OrderBy(p => p.Price);
             List<Product> products = await query.ToListAsync();

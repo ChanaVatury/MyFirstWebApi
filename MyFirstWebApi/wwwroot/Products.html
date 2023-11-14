@@ -13,13 +13,13 @@
             </div>
             <h1></h1>
             <p class="price"></p>
-            <p class="description"></p>
+            <p class="name"></p>
             <p><button>הוסף לסל</button></p>
         </div>
     </template>
     <template id="temp-category">
-        <div class="cb checkbox">
-            <input type="checkbox" class="opt" id="" value="">
+         <div class="cb checkbox">
+            <input onclick="filterProducts()" type="checkbox" class="opt" id="" value="">
             <label for="">
                 <span class="OptionName"></span>
                 <span class="Count"></span>
@@ -28,7 +28,7 @@
         </div>
     </template>
 </head>
-<body>
+<body onload="showCategories(); drawProducts()">
     <header>
         <div class="bar">
 
@@ -84,7 +84,7 @@
 
             <input type="text" id="nameSearch" class="floatRight" placeholder="חיפוש לפי שם מוצר">
 
-            <button class="floatRight" tabindex="0" onclick="filterProducts()">
+            <button class="floatRight" tabindex="0" onclick="filterProducts()" >
                 <span class="header42"><img src="searchIcon.svg" alt="סמל חיפוש"></span>
             </button>
         </div>
