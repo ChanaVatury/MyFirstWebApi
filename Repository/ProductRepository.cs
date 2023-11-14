@@ -21,7 +21,7 @@ namespace Repository
             int? maxPrice, int?[] categoryIds)
         {
             var query = shoppingBookContext.Products.Where(product =>
-                (name == null) ? (true) : (product.Name.Contains(name))
+                (name == null ? (true) : (product.Name.Contains(name)))
                 && ((minPrice == null) ? (true) : (product.Price >= minPrice))
                 && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
                 && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
