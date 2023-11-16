@@ -2,7 +2,7 @@
 let count = sessionStorage.getItem("count");
 async function drawProducts() {
     for (let i = 0; i < count; i++) {
-        draw(sessionStorage.getItem("count")[i])
+        draw(sessionStorage.getItem("MyCart")[i+2])
     }
 }
 
