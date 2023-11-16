@@ -1,7 +1,7 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
-
+//Rename folder name to Repositories
 namespace Repository
 {
     public class UserRepository : IUserRepository

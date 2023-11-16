@@ -36,6 +36,8 @@ namespace MyFirstWebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<Users>> Get([FromQuery] string userName, [FromQuery] string code)
         {
+            //Change object name from Users to User (in entities)...
+            //Change the "code" variable name- to password.
             Users user = await userServices.getUserByPasswordAndUserName(code, userName);
             if (user == null)
                  return NoContent();
@@ -57,21 +59,23 @@ namespace MyFirstWebApi.Controllers
         {
             
                 Users newUser = await userServices.addUser(user);
-
+            //Check if newUser== null return BadRequest()
             return CreatedAtAction(nameof(Get), new { id = user.UserId }, user);
-               
            
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
+        //Function should return Task<ActionResult<User>>>
         public async Task<Users> Put(int id, [FromBody] Users userToUpdate)
         {
             Users user = await userServices.updateUser(id, userToUpdate);
+            //Check if user== null return BadRequest()
+            //else return OK(user) 
             return user;
         }
 
-
+        //Clean code -Remove unnecessary lines of code.
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)

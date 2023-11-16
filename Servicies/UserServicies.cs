@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zxcvbn;
-
+//Rename folder name to Services (spelling!! )
 namespace Servicies
 {
     public class UserServicies : IUserServicies
