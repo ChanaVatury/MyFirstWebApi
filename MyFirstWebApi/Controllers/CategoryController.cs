@@ -20,6 +20,8 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<CategoryController>
         [HttpGet]
+        //Function should return Task<ActionResult<IEnumerable<Category>>>
+        //if null return NoContent() else OK(categories)...
         public async Task<IEnumerable<Category>> Get()
         {
             IEnumerable<Category> allCategory = await categoryServices.getAllCategory();

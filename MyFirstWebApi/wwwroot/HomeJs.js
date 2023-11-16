@@ -1,3 +1,7 @@
+//Add folders - scripts, style(css) etc... arrange the files in folders!
+//I recommend to change the project name to webApiShopSite etc. 
+
+
 const ShowRegisterTags = () => {
     const reg = document.getElementById("register")
     reg.style.visibility = "initial"
@@ -25,10 +29,12 @@ async function Register() {
         })
     
         if (!res.ok)
+        //alert("Registration failed")
             throw new Error("error in adding your details to our site")
-       
+        //Check response status code- if response is ok..., if not alert a suitable message...
         const data = await res.json();
-        if (data.userId == 0) {
+        //??? - data.userId == 0 ??  if creation failed you should get 400 status code.
+        if (data.userId == 0) { 
             alert(`try again, you have an error in your information`)
         }
         else{
@@ -39,19 +45,23 @@ async function Register() {
 
     }
          catch (er) {
-            alert("error..., please try again")
+        alert("error..., please try again")
+          //Alerting errors to the user is not recommended, log them to the console.
+
         } 
         
         
     
 }
 async function Login() {
-    const Email = document.getElementById("Email1").value;
+   //clean code- by Convention: Variables and functions names begin with a lowercase letter. (login, email, password)
+    const data.userId == 0 = document.getElementById("Email1").value;
     const Passwordd = document.getElementById("Passwordd1").value;
 
     const res = await fetch(`api/users?userName=${Email}&code=${Passwordd}`) 
     if (!res.ok) {
         ShowRegisterTags()
+        //Instead of throwing an error alert a suitable message. 
         throw new Error("please register")
     }
     const data = await res.json();
@@ -69,10 +79,11 @@ async function Login() {
 //        throw new Error("please register")
 //    }
 
-   
+
 
 
 /*}*/
+//showUpdateForm(Apdate- spelling!)
 function showApdate() {
     const reg = document.getElementById("update")
     reg.style.visibility = "initial"
@@ -101,6 +112,7 @@ async function Update() {
         console.log(data)
         sessionStorage.setItem("CurrentUser", JSON.stringify(data))
         alert(`the user ${data.userId} updated`)
+        //Remove the next alert
         alert("apdated")
        
     }
