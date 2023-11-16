@@ -57,11 +57,14 @@ function draw(prod) {
     cln.querySelector("button").addEventListener('click', () => { addToCart(prod) });
     document.getElementById("PoductList").appendChild(cln);
 }
+
+cart = [];
 async function addToCart(prod) {
     count++;
     document.getElementById("ItemsCountText").innerHTML = count;
-    console.log(prod);
-    sessionStorage.setItem("MyCart", JSON.stringify(prod))
+    cart.push(prod);
+    sessionStorage.setItem("MyCart", JSON.stringify(cart));
+    sessionStorage.setItem("count", count);
     
 }
 async function getAllCategory() {
