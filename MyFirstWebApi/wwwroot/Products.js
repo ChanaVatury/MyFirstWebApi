@@ -1,4 +1,5 @@
-
+let c = 0;
+let count = 0;
 async function filterProducts() {
     let checkedCategories = [];
     const allCategoriesOptions = document.querySelectorAll(".opt");
@@ -12,19 +13,38 @@ async function filterProducts() {
     getBooks(name, minPrice, maxPrice, checkedCategories);
 }
 async function getBooks(name, minPrice, maxPrice, checkedCategories) {
-    let url = `api/Product?name=${name}?minPrice=${minPrice}?maxPrice=${maxPrice}`;
-    for (let i = 0; i < checkedCategories.length; i++) {
-        url += `&categoryIds=${checkedCategories[i]}`;
+    let url = `/api/Product`;
+    if (name || minPrice || maxPrice || checkedCategories)
+        url += `?`
+    if (name) url += `name=${name}`;
+    if (minPrice) url += `&minPrice=${minPrice}`;
+    if (maxPrice) url += `&maxPrice=${maxPrice}`;
+    if (checkedCategories) {
+        for (let i = 0; i < checkedCategories.length; i++) {
+            url += `&categoryIds=${checkedCategories[i]}`
+        }
     }
+
+   
     const res = await fetch(url);
     const data = await res.json();
+    c = data.length;
+    document.getElementById("counter").innerHTML = c;
     console.log(data);
+    drawProducts1(data);
 }
 async function drawProducts() {
     const res = await fetch(`api/Product`);
     const data = await res.json();
     console.log(data)
+    c = data.length;
+    document.getElementById("counter").innerHTML = c;
     for (let i=0; i < data.length; i++) {
+        draw(data[i])
+    }
+}
+async function drawProducts1(data) {
+    for (let i = 0; i < data.length; i++) {
         draw(data[i])
     }
 }
@@ -37,8 +57,12 @@ function draw(prod) {
     cln.querySelector("button").addEventListener('click', () => { addToCart(prod) });
     document.getElementById("PoductList").appendChild(cln);
 }
-async function addToCart() {
-
+async function addToCart(prod) {
+    count++;
+    document.getElementById("ItemsCountText").innerHTML = count;
+    console.log(prod);
+    sessionStorage.setItem("MyCart", JSON.stringify(prod))
+    
 }
 async function getAllCategory() {
     const res = await fetch("api/category");
