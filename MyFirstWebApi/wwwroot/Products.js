@@ -4,7 +4,8 @@ async function filterProducts() {
     let checkedCategories = [];
     const allCategoriesOptions = document.querySelectorAll(".opt");
     for (let i = 0; i < allCategoriesOptions.length; i++) {
-        if (allCategoriesOptions[i].checked) checkedCategories.push(allCategoriesOptions[i].id)
+        if (allCategoriesOptions[i].checked)
+            checkedCategories.push(allCategoriesOptions[i].value)
     }
     const name = document.getElementById("nameSearch").value;
     const minPrice = document.getElementById("minPrice").value;
@@ -54,6 +55,7 @@ function draw(prod) {
     cln.querySelector("h1").innerText = prod.name;
     cln.querySelector(".price").innerText = prod.price;
     cln.querySelector("img").src = "./images/" + prod.image;
+
     cln.querySelector("button").addEventListener('click', () => { addToCart(prod) });
     document.getElementById("PoductList").appendChild(cln);
 }
@@ -83,6 +85,7 @@ const showCategories = async () => {
         var tmpCatg = document.getElementById("temp-category");
         var cln = tmpCatg.content.cloneNode(true);
         cln.querySelector("span.OptionName").innerText = Categories[i].name;
+        cln.querySelector(".opt").value = Categories[i].categoryId;
         document.getElementById("categoryList").appendChild(cln);
     }
 
