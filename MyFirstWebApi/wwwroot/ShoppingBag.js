@@ -8,7 +8,12 @@ async function drawProducts() {
         var cln = tmpCatg.content.cloneNode(true);
         cln.querySelector(".price").innerText = prod[i].price;
         cln.querySelector("img").src = "./images/" + prod[i].image;
+        cln.querySelector(".totalColumn").addEventListener('click', () => { deleteProd(prod[i]) });
         document.getElementById("items").appendChild(cln);
     }
+}
+
+async function deleteProd(prod) {
+
 }
 
