@@ -58,6 +58,7 @@ function draw(prod) {
 
     cln.querySelector("button").addEventListener('click', () => { addToCart(prod) });
     document.getElementById("PoductList").appendChild(cln);
+    document.getElementById("ItemsCountText").innerHTML = count;
 }
 
 cart = [];

@@ -1,7 +1,8 @@
 
 let count = sessionStorage.getItem("count");
+let prod = JSON.parse(sessionStorage.getItem("MyCart"));
 async function drawProducts() {
-    let prod = JSON.parse(sessionStorage.getItem("MyCart"));
+ 
     for (let i = 0; i < prod.length; i++) {
         console.log(prod[i])
         var tmpCatg = document.getElementById("temp-row");
@@ -13,7 +14,16 @@ async function drawProducts() {
     }
 }
 
-async function deleteProd(prod) {
-
+async function deleteProd(pro) {
+    let p = prod;
+    prod = [];
+    for (let i = 0; i < p.length; i++) {
+        if (p[i].id == p.id) {
+            prod.push(p[i])
+        }
+    }
+    sessionStorage.setItem("MyCart", p);
+    let prod = JSON.parse(sessionStorage.getItem("MyCart"));
+    drawProducts();
 }
 
