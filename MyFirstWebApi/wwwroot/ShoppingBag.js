@@ -45,8 +45,8 @@ async function placeOrder() {
         body: JSON.stringify(order)
     })
 
-    if (!res.ok)
-        throw new Error("error in adding your details to our site")
+    //if (!res.ok)
+    //    throw new Error("error in adding your details to our site")
 
     let data = await res.json();
     alert(`your order ${data.orderId}`)

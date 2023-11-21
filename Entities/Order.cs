@@ -13,8 +13,8 @@ public partial class Order
     public int? OrderSum { get; set; }
 
     public int? UserId { get; set; }
-
+    
     public virtual ICollection<OrdersItem> OrdersItems { get; set; } = new List<OrdersItem>();
-   // [JsonIgnore]
+
     public virtual Users? User { get; set; }
 }
