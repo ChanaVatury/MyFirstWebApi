@@ -1,4 +1,6 @@
-﻿using Entities;
+﻿using AutoMapper;
+using DTO;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Servicies;
 using System.Runtime.CompilerServices;
@@ -15,10 +17,11 @@ namespace MyFirstWebApi.Controllers
     {
 
         IUserServicies userServices;
-
-        public UsersController(IUserServicies _userServices)
+        IMapper mapper;
+        public UsersController(IUserServicies _userServices,IMapper _mapper)
         {
             userServices = _userServices;
+            mapper = _mapper;
         }
         [HttpPost("check")]
         public int Check([FromBody] string password)
@@ -32,10 +35,13 @@ namespace MyFirstWebApi.Controllers
 
         }
 
+        [Route("login")]
         // GET: api/<UserController>
-        [HttpGet]
-        public async Task<ActionResult<Users>> Get([FromQuery] string userName, [FromQuery] string code)
+        [HttpPost]
+        public async Task<ActionResult<Users>> Get([FromBody] UserDTOLogin userDTOLogin)
         {
+            string code = userDTOLogin.Passwordd;
+            string userName = userDTOLogin.Email;
             Users user = await userServices.getUserByPasswordAndUserName(code, userName);
             if (user == null)
                  return NoContent();
@@ -53,22 +59,23 @@ namespace MyFirstWebApi.Controllers
 
         //POST api/<UserController>
         [HttpPost("")]//
-        public async Task<ActionResult> Post([FromBody] Users user)
+        public async Task<ActionResult> Post([FromBody] UserDTO userDTO)
         {
-            
-                Users newUser = await userServices.addUser(user);
+            Users newUser = mapper.Map<UserDTO, Users>(userDTO);
+            await userServices.addUser(newUser);
 
-            return CreatedAtAction(nameof(Get), new { id = user.UserId }, user);
+            return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
                
            
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public async Task<Users> Put(int id, [FromBody] Users userToUpdate)
+        public async Task<UserDTO> Put(int id, [FromBody] UserDTO userDTO)
         {
-            Users user = await userServices.updateUser(id, userToUpdate);
-            return user;
+            Users newUser = mapper.Map<UserDTO, Users>(userDTO);
+            await userServices.updateUser(id, newUser);
+            return mapper.Map<Users,UserDTO >(newUser);
         }
 
 

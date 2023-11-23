@@ -53,7 +53,3 @@ async function placeOrder() {
     
  
 }
-
-
-
-
