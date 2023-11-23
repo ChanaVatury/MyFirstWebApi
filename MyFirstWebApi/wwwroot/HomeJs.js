@@ -48,8 +48,14 @@ async function Register() {
 async function Login() {
     const Email = document.getElementById("Email1").value;
     const Passwordd = document.getElementById("Passwordd1").value;
-
-    const res = await fetch(`api/users?userName=${Email}&code=${Passwordd}`) 
+    const user = { Email, Passwordd }
+    const res = await fetch("api/users/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
     if (!res.ok) {
         ShowRegisterTags()
         throw new Error("please register")
