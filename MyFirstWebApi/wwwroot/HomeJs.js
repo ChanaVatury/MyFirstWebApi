@@ -87,8 +87,8 @@ async function Update() {
     try {
     const userNow = sessionStorage.getItem("CurrentUser");
     const id = JSON.parse(userNow).userId;
-        const Email = document.getElementById("Email").value;
-        const Passwordd = document.getElementById("Passwordd").value;
+    const Email = document.getElementById("Email").value;
+    const Passwordd = document.getElementById("Passwordd").value;
     const FirstName = document.getElementById("FirstName").value;
     const LastName = document.getElementById("LastName").value;
         const User = { Email, Passwordd, FirstName, LastName };

@@ -13,6 +13,8 @@ namespace MyFirstWebApi
             CreateMap<Users, UserDTO>().ReverseMap();
             CreateMap<Users, UserDTOLogin>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Order, OrderDTO>().ReverseMap();
+            CreateMap<OrdersItem, OrderItemDTO>().ReverseMap();
         }
     }
 }
