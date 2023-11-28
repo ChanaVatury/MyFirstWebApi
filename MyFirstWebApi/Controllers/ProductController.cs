@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using AutoMapper;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Servicies;
 
@@ -11,10 +12,12 @@ namespace MyFirstWebApi.Controllers
     public class ProductController : ControllerBase
     {
         IProductServices productServices;
+        IMapper mapper;
 
-        public ProductController(IProductServices _productServices)
+        public ProductController(IProductServices _productServices, IMapper _mapper)
         {
             productServices = _productServices;
+            mapper = _mapper;
         }
 
         // GET: api/<ProductController>

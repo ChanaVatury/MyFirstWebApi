@@ -49,7 +49,7 @@ async function placeOrder() {
     //    throw new Error("error in adding your details to our site")
 
     let data = await res.json();
-    alert(`your order ${data.orderId}`)
+    alert(`your order ${data.orderId} get successfully`)
     
  
 }
