@@ -45,8 +45,8 @@ namespace MyFirstWebApi.Controllers
         {
             try
             {
-                var a = 0;
-                var t=9 / a;
+                //var a = 0;
+                //var t=9 / a;
                 string code = userDTOLogin.Passwordd;
                 string userName = userDTOLogin.Email;
                 Users user = await userServices.getUserByPasswordAndUserName(code, userName);

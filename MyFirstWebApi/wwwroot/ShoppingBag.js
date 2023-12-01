@@ -30,6 +30,12 @@ async function deletFromCart(prod1) {
 }
 
 async function placeOrder() {
+
+    console.log(sessionStorage.getItem("CurrentUser"));
+    if (sessionStorage.getItem("CurrentUser") == null)
+        window.location.href = "./home.html";
+
+
     let order = {
         orderDate : new Date(),
         orderSum: c,
