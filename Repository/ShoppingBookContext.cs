@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Extensions.Configuration;
 
 namespace Repository;
 
 public partial class ShoppingBookContext : DbContext
 {
+
     public ShoppingBookContext()
     {
     }
-
-    public ShoppingBookContext(DbContextOptions<ShoppingBookContext> options)
+    public IConfiguration configuration { get; }
+    public ShoppingBookContext(DbContextOptions<ShoppingBookContext> options, IConfiguration _configuration)
         : base(options)
     {
+        configuration = _configuration;
     }
 
     public virtual DbSet<Category> Categories { get; set; }
@@ -29,7 +32,7 @@ public partial class ShoppingBookContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=ShoppingBook;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("school"));
     //
     //"Server=DESKTOP - E0FAPSB\\SQLEXPRESS;Database=ShoppingBook;Trusted_Connection=True;TrustServerCertificate=True"
     protected override void OnModelCreating(ModelBuilder modelBuilder)

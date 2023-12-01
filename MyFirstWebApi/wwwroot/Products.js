@@ -25,8 +25,6 @@ async function getBooks(name, minPrice, maxPrice, checkedCategories) {
             url += `&categoryIds=${checkedCategories[i]}`
         }
     }
-
-   
     const res = await fetch(url);
     const data = await res.json();
     c = data.length;

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using Repository;
 using Servicies;
 
@@ -24,6 +25,8 @@ internal class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ShoppingBookContext>();
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        builder.Services.AddDbContext<ShoppingBookContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("school")));
+        builder.Host.UseNLog();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

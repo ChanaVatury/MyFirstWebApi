@@ -56,7 +56,7 @@ async function Login() {
         },
         body: JSON.stringify(user)
     })
-    if (!res.ok) {
+    if (res.status == 204 || !res.ok) {
         ShowRegisterTags()
         throw new Error("please register")
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DTO;
 using Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Servicies;
 using System.Runtime.CompilerServices;
@@ -18,10 +19,12 @@ namespace MyFirstWebApi.Controllers
 
         IUserServicies userServices;
         IMapper mapper;
-        public UsersController(IUserServicies _userServices,IMapper _mapper)
+        private ILogger<UsersController> logger;
+        public UsersController(IUserServicies _userServices,IMapper _mapper, ILogger<UsersController> _logger)
         {
             userServices = _userServices;
             mapper = _mapper;
+            logger = _logger;
         }
         [HttpPost("check")]
         public int Check([FromBody] string password)
@@ -40,12 +43,28 @@ namespace MyFirstWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Users>> Get([FromBody] UserDTOLogin userDTOLogin)
         {
-            string code = userDTOLogin.Passwordd;
-            string userName = userDTOLogin.Email;
-            Users user = await userServices.getUserByPasswordAndUserName(code, userName);
-            if (user == null)
-                 return NoContent();
-            return Ok(user);
+            try
+            {
+                var a = 0;
+                var t=9 / a;
+                string code = userDTOLogin.Passwordd;
+                string userName = userDTOLogin.Email;
+                Users user = await userServices.getUserByPasswordAndUserName(code, userName);
+                if (user == null)
+                {
+                    logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
+                    return NoContent();
+                }
+                logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogError($"error while login: {ex}");
+                return BadRequest();
+            }
+
         }
         // GET api/<UserController>/5
         //[HttpGet("{id}")]
