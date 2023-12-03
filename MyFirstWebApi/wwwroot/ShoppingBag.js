@@ -3,7 +3,12 @@ let count = sessionStorage.getItem("count");
 let prod = JSON.parse(sessionStorage.getItem("MyCart"));
 let c = 0;
 //let count2 = prod.length;
-
+class OrderItem{
+    constructor(UserId, Quantity) {
+        this.UserId = UserId;
+        this.Quantity = Quantity;
+    }
+}
 async function drawProducts() {
     document.getElementById("itemCount").innerHTML = prod.length;
     c = 0;
@@ -35,12 +40,19 @@ async function placeOrder() {
     if (sessionStorage.getItem("CurrentUser") == null)
         window.location.href = "./home.html";
 
+    let orderItems = [];
+    for (let i = 0; i < prod.length; i++) {
+        let UserId = prod[i].id
+        let Quantity = 0
+        orderItems[i] = new OrderItem(UserId, Quantity)
+    }
+
 
     let order = {
         orderDate : new Date(),
         orderSum: c,
         userId: JSON.parse(sessionStorage.getItem("CurrentUser")).userId,
-        ordersItems:prod
+        ordersItems: orderItems
     };
  
     const res = await fetch("api/order/", {

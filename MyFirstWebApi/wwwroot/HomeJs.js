@@ -64,7 +64,7 @@ async function Login() {
     console.log(data);
 
     sessionStorage.setItem("CurrentUser", JSON.stringify(data));
-    window.location.href = './Update.html';
+    window.location.href = './Products.html';
    
 }
 //async function GetById(id) {
