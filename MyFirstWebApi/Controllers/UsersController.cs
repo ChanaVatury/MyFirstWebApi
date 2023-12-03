@@ -46,22 +46,22 @@ namespace MyFirstWebApi.Controllers
             try
             {
                 //var a = 0;
-                //var t=9 / a;
+                //var t = 9 / a;
                 string code = userDTOLogin.Passwordd;
                 string userName = userDTOLogin.Email;
                 Users user = await userServices.getUserByPasswordAndUserName(code, userName);
                 if (user == null)
                 {
-                    logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
+                    //logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
                     return NoContent();
                 }
-                logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
+                //logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
                 return Ok(user);
             }
             catch (Exception ex)
             {
 
-                logger.LogError($"error while login: {ex}");
+                //logger.LogError($"error while login: {ex}");
                 return BadRequest();
             }
 

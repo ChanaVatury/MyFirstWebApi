@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.Extensions.Logging;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,31 @@ namespace Servicies
     public class OrderServicies : IOrderServicies
     {
         private readonly IOrderRepository orderRepository;
+        private ILogger<OrderServicies> logger;
 
-        public OrderServicies(IOrderRepository _orderRepository)
+        public OrderServicies(IOrderRepository _orderRepository, ILogger<OrderServicies> _logger)
         {
             orderRepository = _orderRepository;
+            logger = _logger;
         }
         public async Task<Order> addOrder(Order order)
         {
+                int  order_sum = 0;
+                var o = order.OrdersItems;
+                foreach (OrdersItem i in o)
+                {
+                    int sum = await orderRepository.getprice(i);
+                    sum = (int)(sum * (i.Quantity + 1));
+                    order_sum += sum;
 
+                }
+                if (order_sum != order.OrderSum)
+
+                {
+                    Console.WriteLine("ganavvvvvvvvvvvvvvvvvvvvvvvvvvv");
+                    logger.LogInformation("{1} try to still!!!!!!!!!!! ", order.UserId);
+                    logger.LogError($"try to still: {order.UserId}");
+                }
             return await orderRepository.addOrder(order);
         }
 

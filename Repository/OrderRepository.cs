@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,16 @@ namespace Repository
 
         public async Task<Order> addOrder(Order order)
         {
+
             await shoppingBookContext.Orders.AddAsync(order);
             await shoppingBookContext.SaveChangesAsync();
             return order;
         }
+        public async Task<int> getprice(OrdersItem order)
+        {
+            Product product = shoppingBookContext.Products.Where(item => item.Id == order.UserId).FirstOrDefault();
+            return (int)product.Price;
+        }
+
     }
 }

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using MyFirstWebApi.MiddelWare;
+using MyFirstWebApi.MiddleWare;
 using NLog.Web;
 using Repository;
 using Servicies;
@@ -21,6 +23,8 @@ internal class Program
         builder.Services.AddTransient<ICategoryServices, CategoryServices>();
         builder.Services.AddTransient<IOrderRepository, OrderRepository>();
         builder.Services.AddTransient<IOrderServicies, OrderServicies>();
+        builder.Services.AddTransient<IRaitingRepository, RaitingRepository>();
+        builder.Services.AddTransient<IRatingServicies, RatingServicies>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ShoppingBookContext>();
@@ -35,8 +39,10 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
+       // app.UseErrorHandlingMiddleware();
+        //app.UseRatingMiddleware();
         app.UseHttpsRedirection();
+
 
         app.UseStaticFiles();
 
