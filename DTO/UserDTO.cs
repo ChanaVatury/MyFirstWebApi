@@ -14,7 +14,7 @@ namespace DTO
         public string? Email { get; set; }
 
         public string? Passwordd { get; set; }
-
+        [MinLength(7)]
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }

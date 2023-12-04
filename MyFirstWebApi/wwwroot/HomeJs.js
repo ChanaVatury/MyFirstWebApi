@@ -6,13 +6,18 @@ const ShowRegisterTags = () => {
 async function Register() {
     try {
         const Email = document.getElementById("Email").value;
+        var em = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!em.test(Email)) {
+            alert("your email is not valid");
+            return;
+        }
         const Passwordd = document.getElementById("Passwordd").value;
         checkCode()
-        //if (document.getElementById("password-strength-meter").value < 2) {
-        //    alert('the password is not strength')
-        //    throw new Error("please make strenghter password")
-        //}
         const FirstName = document.getElementById("FirstName").value;
+        if (FirstName.length <= 7) {
+            alert("to short");
+            return;
+        }
         const LastName = document.getElementById("LastName").value;
         const User = { Email, Passwordd, FirstName, LastName };
 
@@ -39,7 +44,7 @@ async function Register() {
 
     }
          catch (er) {
-            alert("error..., please try again")
+            alert("error..., please try again"+ er)
         } 
         
         

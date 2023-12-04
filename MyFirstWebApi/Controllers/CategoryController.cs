@@ -26,9 +26,11 @@ namespace MyFirstWebApi.Controllers
         [HttpGet]
         public async Task<IEnumerable<CategoryDTO>> Get()
         {
-            IEnumerable<Category> allCategory = await categoryServices.getAllCategory();
-            IEnumerable<CategoryDTO> CategoryListDTO = mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDTO>>(allCategory);
-            return CategoryListDTO;
+
+                IEnumerable<Category> allCategory = await categoryServices.getAllCategory();
+                IEnumerable<CategoryDTO> CategoryListDTO = mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDTO>>(allCategory);
+                return CategoryListDTO;
+        
         }
 
     }
