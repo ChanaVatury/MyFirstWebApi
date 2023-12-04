@@ -92,9 +92,18 @@ async function Update() {
     try {
     const userNow = sessionStorage.getItem("CurrentUser");
     const id = JSON.parse(userNow).userId;
-    const Email = document.getElementById("Email").value;
+        const Email = document.getElementById("Email").value;
+        var em = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!em.test(Email)) {
+            alert("your email is not valid");
+            return;
+        }
     const Passwordd = document.getElementById("Passwordd").value;
-    const FirstName = document.getElementById("FirstName").value;
+        const FirstName = document.getElementById("FirstName").value;
+        if (FirstName.length <= 7) {
+            alert("to short");
+            return;
+        }
     const LastName = document.getElementById("LastName").value;
         const User = { Email, Passwordd, FirstName, LastName };
   

@@ -17,9 +17,9 @@ internal class Program
         builder.Services.AddControllers();
         builder.Services.AddTransient<IUserRepository, UserRepository>();
         builder.Services.AddTransient<IUserServicies, UserServicies>();
+        builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
         builder.Services.AddTransient<IProductRepository, ProductRepository>();
         builder.Services.AddTransient<IProductServices, ProductServices>();
-        builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
         builder.Services.AddTransient<ICategoryServices, CategoryServices>();
         builder.Services.AddTransient<IOrderRepository, OrderRepository>();
         builder.Services.AddTransient<IOrderServicies, OrderServicies>();
