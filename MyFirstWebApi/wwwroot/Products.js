@@ -1,5 +1,5 @@
 let c = 0;
-let count = 0;
+
 async function filterProducts() {
     let checkedCategories = [];
     const allCategoriesOptions = document.querySelectorAll(".opt");
@@ -33,6 +33,10 @@ async function getBooks(name, minPrice, maxPrice, checkedCategories) {
     drawProducts1(data);
 }
 async function drawProducts() {
+    if (sessionStorage.getItem("MyCart")) {
+        cart = JSON.parse( sessionStorage.getItem("MyCart"));
+    }
+    
     const res = await fetch(`api/Product`);
     const data = await res.json();
     console.log(data)
@@ -58,23 +62,29 @@ function draw(prod) {
     document.getElementById("PoductList").appendChild(cln);
     document.getElementById("ItemsCountText").innerHTML = count;
 }
-
+let count;
 cart = [];
+
 async function addToCart(prod) {
     count++;
-    document.getElementById("ItemsCountText").innerHTML = count;
     cart.push(prod);
+    sessionStorage.setItem("count", JSON.stringify(count));
+    document.getElementById("ItemsCountText").innerHTML = count;
     sessionStorage.setItem("MyCart", JSON.stringify(cart));
-    sessionStorage.setItem("count", count);
+
     
 }
 async function getAllCategory() {
+
+  
     const res = await fetch("api/category");
     const data = await res.json();
     return data;
 }
 
 const showCategories = async () => {
+    count = JSON.parse( sessionStorage.getItem("count"));
+    document.getElementById("ItemsCountText").innerText = count;
     const Categories = await getAllCategory();
     console.log(Categories);
     const res = await fetch(`api/Product`);

@@ -37,6 +37,8 @@ namespace MyFirstWebApi.Controllers
         {
             Order ord = mapper.Map<OrderDTO, Order>(order);
             Order newOrder = await orderServicies.addOrder(ord);
+            if (newOrder == null)
+                return BadRequest();
             OrderDTO o= mapper.Map<Order,OrderDTO >(newOrder);
             return CreatedAtAction(nameof(Get), new { id = o.OrderId }, o);
         }

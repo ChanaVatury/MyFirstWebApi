@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using DTO;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Servicies;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +24,12 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public async Task<IEnumerable<Product>> Get(string? name,  int? minPrice,
+        public async Task<IEnumerable<ProductDTO>> Get(string? name,  int? minPrice,
              int? maxPrice, [FromQuery] int?[] categoryIds)
         {
             IEnumerable<Product> allProducts = await productServices.getAllProduct(name,minPrice,maxPrice,categoryIds);
-            return allProducts;
+            IEnumerable<ProductDTO> allProductsDTO=mapper.Map<IEnumerable<Product>, IEnumerable< ProductDTO >> (allProducts);
+            return allProductsDTO;
         }
 
         // GET api/<ProductController>/5

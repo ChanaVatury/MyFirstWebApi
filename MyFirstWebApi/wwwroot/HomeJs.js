@@ -60,7 +60,7 @@ async function Login() {
         ShowRegisterTags()
         throw new Error("please register")
     }
-    const data = await res.json();
+     const data = await res.json();
     console.log(data);
 
     sessionStorage.setItem("CurrentUser", JSON.stringify(data));

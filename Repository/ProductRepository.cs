@@ -25,7 +25,7 @@ namespace Repository
                 && ((minPrice == null) ? (true) : (product.Price >= minPrice))
                 && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
                 && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
-                .OrderBy(p => p.Price);
+                .OrderBy(p => p.Price).Include(i=>i.Category);
             List<Product> products = await query.ToListAsync();
            
             return products;

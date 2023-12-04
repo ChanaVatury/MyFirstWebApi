@@ -30,6 +30,8 @@ async function drawProducts() {
 async function deletFromCart(prod1) {
     prod = prod.filter(c => c != prod1);
     sessionStorage.setItem("MyCart", JSON.stringify(prod));
+    count--;
+    sessionStorage.setItem("count",count);
     document.getElementById("h").replaceChildren([]);
     drawProducts();
 }
@@ -65,7 +67,9 @@ async function placeOrder() {
 
     //if (!res.ok)
     //    throw new Error("error in adding your details to our site")
-
+    if (!res.ok) { 
+        throw new Error("stillllllllllllllllllllllllllllllllllllllllllllllllllll!!!!!!!")
+    }
     let data = await res.json();
     alert(`your order ${data.orderId} get successfully`)
     

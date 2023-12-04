@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using Repository;
 using System;
@@ -33,9 +34,10 @@ namespace Servicies
                 if (order_sum != order.OrderSum)
 
                 {
-                    Console.WriteLine("ganavvvvvvvvvvvvvvvvvvvvvvvvvvv");
-                    logger.LogInformation("{1} try to still!!!!!!!!!!! ", order.UserId);
+                    Console.WriteLine("the polic come to you");
+                    logger.LogInformation("{1} try to still! ", order.UserId);
                     logger.LogError($"try to still: {order.UserId}");
+                    return null;
                 }
             return await orderRepository.addOrder(order);
         }

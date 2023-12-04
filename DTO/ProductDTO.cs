@@ -12,6 +12,8 @@ namespace DTO
 
         public int? CategoryId { get; set; }
 
+        public string CategoryName { get; set; } = null;
+
         public string? Name { get; set; }
 
         public string? Image { get; set; }

@@ -32,7 +32,10 @@ namespace MyFirstWebApi.MiddleWare
                 RecordDate = date
             };
 
-            rating.AddRating(r);
+            await rating.AddRating(r);
+
+            await _next(httpContext);
+
         }
     }
 

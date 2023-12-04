@@ -39,16 +39,18 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-       // app.UseErrorHandlingMiddleware();
-        //app.UseRatingMiddleware();
-        app.UseHttpsRedirection();
 
+        app.UseHttpsRedirection();
 
         app.UseStaticFiles();
 
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.UseErrorHandlingMiddleware();
+
+        app.UseRatingMiddleware();
 
         app.Run();
     }
