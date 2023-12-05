@@ -56,22 +56,25 @@ async function placeOrder() {
         userId: JSON.parse(sessionStorage.getItem("CurrentUser")).userId,
         ordersItems: orderItems
     };
- 
-    const res = await fetch("api/order/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(order)
-    })
+    try {
+        const res = await fetch("api/order/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(order)
+        })
 
-    //if (!res.ok)
-    //    throw new Error("error in adding your details to our site")
-    if (!res.ok) { 
-        throw new Error("stillllllllllllllllllllllllllllllllllllllllllllllllllll!!!!!!!")
+        //if (!res.ok)
+        //    throw new Error("error in adding your details to our site")
+        if (!res.ok) {
+            throw new Error("stillllllllllllllllllllllllllllllllllllllllllllllllllll!!!!!!!")
+        }
+        let data = await res.json();
+        alert(`your order ${data.orderId} get successfully`)
     }
-    let data = await res.json();
-    alert(`your order ${data.orderId} get successfully`)
+    catch (e) {
+        alert(e);
+    }
     
- 
 }

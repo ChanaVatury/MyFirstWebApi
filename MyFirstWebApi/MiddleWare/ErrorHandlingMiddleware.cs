@@ -8,16 +8,18 @@ namespace MyFirstWebApi.MiddelWare
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ErrorHandlingMiddleware> _logger;
+        private  ILogger<ErrorHandlingMiddleware> logger;
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
+
         }
 
         public async Task Invoke(HttpContext httpContext, ILogger<ErrorHandlingMiddleware> _logger)
         {
             try
-            {
+            {                                               
+                logger =_logger;
                 await _next(httpContext);
             }
             catch(Exception e)

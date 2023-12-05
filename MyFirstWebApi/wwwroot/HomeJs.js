@@ -92,28 +92,28 @@ async function Update() {
     try {
     const userNow = sessionStorage.getItem("CurrentUser");
     const id = JSON.parse(userNow).userId;
-        const Email = document.getElementById("Email").value;
-        var em = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!em.test(Email)) {
-            alert("your email is not valid");
-            return;
-        }
+    const Email = document.getElementById("Email").value;
+    var em = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!em.test(Email)) {
+        alert("your email is not valid");
+        return;
+    }
     const Passwordd = document.getElementById("Passwordd").value;
-        const FirstName = document.getElementById("FirstName").value;
-        if (FirstName.length <= 7) {
-            alert("to short");
-            return;
-        }
+    const FirstName = document.getElementById("FirstName").value;
+    if (FirstName.length <= 7) {
+        alert("to short");
+        return;
+    }
     const LastName = document.getElementById("LastName").value;
-        const User = { Email, Passwordd, FirstName, LastName };
+    const User = { Email, Passwordd, FirstName, LastName };
   
-        const res = await fetch(`api/users/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(User)
-        })
+    const res = await fetch(`api/users/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(User)
+    })
 
         if (!res.ok)
             throw new Error("error in updating your details")

@@ -43,28 +43,12 @@ namespace MyFirstWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Users>> Get([FromBody] UserDTOLogin userDTOLogin)
         {
-            try
-            {
-                //var a = 0;
-                //var t = 9 / a;
                 string code = userDTOLogin.Passwordd;
                 string userName = userDTOLogin.Email;
                 Users user = await userServices.getUserByPasswordAndUserName(code, userName);
-                if (user == null)
-                {
-                    //logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
-                    return NoContent();
-                }
-                //logger.LogInformation("Login attempter with User Name,{0} and password{1} ", userName, code);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-
-                //logger.LogError($"error while login: {ex}");
-                return BadRequest();
-            }
-
+                if (user == null)            
+                    return NotFound();
+              return Ok(user);  
         }
         // GET api/<UserController>/5
         //[HttpGet("{id}")]
@@ -81,10 +65,10 @@ namespace MyFirstWebApi.Controllers
         public async Task<ActionResult> Post([FromBody] UserDTO userDTO)
         {
             Users newUser = mapper.Map<UserDTO, Users>(userDTO);
-            await userServices.addUser(newUser);
-
-            return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
-               
+            Users newU=await userServices.addUser(newUser);
+            if(newU!=null)
+                return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
+            return NoContent();   
            
         }
 

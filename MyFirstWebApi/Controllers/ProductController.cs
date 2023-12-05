@@ -24,12 +24,14 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public async Task<IEnumerable<ProductDTO>> Get(string? name,  int? minPrice,
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> Get(string? name,  int? minPrice,
              int? maxPrice, [FromQuery] int?[] categoryIds)
         {
             IEnumerable<Product> allProducts = await productServices.getAllProduct(name,minPrice,maxPrice,categoryIds);
             IEnumerable<ProductDTO> allProductsDTO=mapper.Map<IEnumerable<Product>, IEnumerable< ProductDTO >> (allProducts);
-            return allProductsDTO;
+            if (allProductsDTO.Count() == 0)
+                return NoContent();
+            return Ok(allProductsDTO);
         }
 
         // GET api/<ProductController>/5

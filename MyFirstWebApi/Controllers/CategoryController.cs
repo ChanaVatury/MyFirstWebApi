@@ -24,12 +24,14 @@ namespace MyFirstWebApi.Controllers
 
         // GET: api/<CategoryController>
         [HttpGet]
-        public async Task<IEnumerable<CategoryDTO>> Get()
+        public async Task<ActionResult<IEnumerable<CategoryDTO>>> Get()
         {
 
                 IEnumerable<Category> allCategory = await categoryServices.getAllCategory();
                 IEnumerable<CategoryDTO> CategoryListDTO = mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDTO>>(allCategory);
-                return CategoryListDTO;
+                if (CategoryListDTO.Count() == 0)
+                    return NoContent();
+                return Ok(CategoryListDTO);
         
         }
 

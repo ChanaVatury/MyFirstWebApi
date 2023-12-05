@@ -25,12 +25,17 @@ async function getBooks(name, minPrice, maxPrice, checkedCategories) {
             url += `&categoryIds=${checkedCategories[i]}`
         }
     }
-    const res = await fetch(url);
-    const data = await res.json();
-    c = data.length;
-    document.getElementById("counter").innerHTML = c;
-    console.log(data);
-    drawProducts1(data);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        c = data.length;
+        document.getElementById("counter").innerHTML = c;
+        console.log(data);
+        drawProducts1(data);
+    }
+    catch (e) {
+        alert(e)
+    }
 }
 async function drawProducts() {
     if (sessionStorage.getItem("MyCart")) {
@@ -76,10 +81,15 @@ async function addToCart(prod) {
 }
 async function getAllCategory() {
 
-  
-    const res = await fetch("api/category");
-    const data = await res.json();
-    return data;
+    try {
+        const res = await fetch("api/category");
+        const data = await res.json();
+        return data;
+    }
+    catch (e) {
+        alert(e);
+    }
+    
 }
 
 const showCategories = async () => {
