@@ -2,7 +2,8 @@
 Html and css files for shop
 
 
-Welcome to my first WEB Api site, and thank you for reading this file.
+my project represents a books store. 
+there are login page for the costumer that made register in the first Entrance to the site.
 
 
 How To Use:
@@ -14,18 +15,17 @@ Open your package manager console,
 
 Write: 1. add-migration [MyDataBaseName]
  		2.Update-DataBase. 	
-And your DB is ready for use!
+and go to the DB
 
+also there is folder with the scripts to write in the DB
 
-About:
-The project represents a clothes store. It includes a login page, when the user gets an option of registering in case of new user. After a successfuly login, you get to a page that offers you to update your user details, or getting into the store. In the store page you can add products to your cart, that is saved in the session storage. There is an option of filtering the products that you see using category, words from product description, minimum price or maximum price as parameters. You can click and go to your cart page, where you can see your cart, remove products from it, and save your order. 
-
+ 
 Written:
 Server side – ASP.NET 7. 
 Client side – JS. 
 
 The project uses WEB API, and is based on REST technology. 
-I was strict in password strength issue: I used zxcvbn-core package to check password strength in user register and while updating details.
+I was strict in password strength issue with used zxcvbn-core package to check password strength in user register and while updating details.
 I worked with layers that are connected with DI, in order of making my application more encapsulated and flexible.
 I used async/await along the way, to make sure my application has the scalability advantage.
 I communicated with the DB (SQL) using Microsoft ORM - EF. I worked in DB first method.

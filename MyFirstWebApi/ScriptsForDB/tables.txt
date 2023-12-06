@@ -1,0 +1,118 @@
+﻿
+this is the script of the tables in the DB: 
+
+
+USE [ShoppingBook]
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 06/12/2023 12:14:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category](
+	[categoryId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [char](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[categoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[orders]    Script Date: 06/12/2023 12:14:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[orders](
+	[orderId] [int] IDENTITY(1,1) NOT NULL,
+	[orderDate] [date] NULL,
+	[orderSum] [int] NULL,
+	[userId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ordersItem]    Script Date: 06/12/2023 12:14:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ordersItem](
+	[orderItemId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[orderId] [int] NULL,
+	[quantity] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orderItemId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 06/12/2023 12:14:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[categoryId] [int] NULL,
+	[name] [char](20) NULL,
+	[image] [char](20) NULL,
+	[price] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RATING]    Script Date: 06/12/2023 12:14:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RATING](
+	[RATING_ID] [int] IDENTITY(1,1) NOT NULL,
+	[HOST] [nvarchar](50) NULL,
+	[METHOD] [nchar](10) NULL,
+	[PATH] [nvarchar](50) NULL,
+	[REFERER] [nvarchar](100) NULL,
+	[USER_AGENT] [nvarchar](max) NULL,
+	[Record_Date] [datetime] NULL,
+ CONSTRAINT [PK_RATING] PRIMARY KEY CLUSTERED 
+(
+	[RATING_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 06/12/2023 12:14:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[userId] [int] IDENTITY(1,1) NOT NULL,
+	[email] [char](30) NULL,
+	[firstName] [char](20) NULL,
+	[lastName] [char](20) NULL,
+	[passwordd] [char](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[userId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[orders]  WITH CHECK ADD FOREIGN KEY([userId])
+REFERENCES [dbo].[Users] ([userId])
+GO
+ALTER TABLE [dbo].[ordersItem]  WITH CHECK ADD FOREIGN KEY([orderId])
+REFERENCES [dbo].[orders] ([orderId])
+GO
+ALTER TABLE [dbo].[ordersItem]  WITH CHECK ADD FOREIGN KEY([userId])
+REFERENCES [dbo].[Product] ([Id])
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD FOREIGN KEY([categoryId])
+REFERENCES [dbo].[Category] ([categoryId])
+GO
+
