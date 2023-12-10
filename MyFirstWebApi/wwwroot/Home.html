@@ -7,38 +7,42 @@
 
 </head>
 <body>
-    <h1>Login</h1>
-    <link href="HomeCss.css" rel="stylesheet" />
+    <div class="container">
+        <div id="register" style="visibility:hidden">
+            <div class="form-container">
+                <h1>Register</h1>
+                <link href="HomeCss.css" rel="stylesheet" />
 
-    <div id="register" style="visibility:hidden">
-    <input id="Email"></input>
-    <label>מייל</label>
-    <br />
-    <input onchange="checkCode()" id="Passwordd"></input>
-    <label>סיסמא</label>
-    <br/>
-    <button onchange="checkCode()">לבדיקת סיסמא</button>
-    <meter max="4" id="password-strength-meter"></meter>
-    <p id="password-strength-text"></p>
-    <br />
-    <input id="FirstName"></input>
-    <label>שם פרטי</label>
-    <br />
-    <input id="LastName"></input>
-    <label>שם משפחה</label>
-    <br />
-    <button onclick="Register()">לרישום</button>
-   </div>
-    <button onclick="ShowRegisterTags()">משתמש חדש</button>
-    <br /><br /><br /><br />
-    <input id="Email1"></input>
-    <label> שם משתמש</label>
-        <br />
-        <input id="Passwordd1"></input>
-        <label>סיסמא</label>
-        <br />
-        <button onclick="Login()">להתחברות</button>
-        <br />
 
+                <input id="Email" placeholder="Email" ></input>
+                <br />
+                <input onchange="checkCode()"type="password" placeholder="Password" id="Passwordd"></input>
+                <br />
+                <button onchange="checkCode()">לבדיקת סיסמא</button>
+                <meter max="4" id="password-strength-meter"></meter>
+                <p id="password-strength-text"></p>
+                <br />
+                <input id="FirstName" placeholder="FirstName"></input>
+          
+                <br />
+                <input id="LastName" placeholder="LastName"></input>
+                <br />
+                <button onclick="Register()">לרישום</button>
+            </div>
+        </div>
+        <button onclick="ShowRegisterTags()">משתמש חדש</button>
+        <br /><br /><br /><br />
+        <div class="form-container">
+            <h1>Login</h1>
+            <input id="Email1" placeholder="Email" ></input>
+           
+            <br />
+            <input id="Passwordd1" type="password" placeholder="Password"></input>
+           
+            <br />
+            <button onclick="Login()">להתחברות</button>
+            <br />
+        </div>
+    </div>
 </body>
     </html>
